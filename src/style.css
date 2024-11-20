@@ -35,7 +35,7 @@ nav h1 {
   margin: 0;
   font-size: 2.8rem;
   font-weight: 700;
-  color: transparent;
+  color: var(--text-primary);
   background: linear-gradient(45deg, #3498db, #e74c3c, #3498db);
   background-size: 200% auto;
   -webkit-background-clip: text;
