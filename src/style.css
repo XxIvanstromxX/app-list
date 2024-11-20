@@ -26,24 +26,36 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav h1 {
   margin: 0;
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-size: 2.8rem;
+  font-weight: 700;
   color: transparent;
-  background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+  background: linear-gradient(45deg, #3498db, #e74c3c, #3498db);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   position: relative;
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.5rem 2rem;
+  padding: 0.8rem 2.5rem;
   border-radius: 15px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
 }
 
 nav h1::before {
@@ -55,32 +67,20 @@ nav h1::before {
   bottom: 0;
   background: var(--background);
   border-radius: 15px;
-  box-shadow: 5px 5px 10px var(--shadow-dark),
-              -5px -5px 10px var(--shadow-light);
+  box-shadow: 8px 8px 16px var(--shadow-dark),
+              -8px -8px 16px var(--shadow-light);
   z-index: -1;
-}
-
-nav h1::after {
-  content: '✓';
-  font-size: 1.5rem;
-  position: absolute;
-  right: 0.8rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  transition: all 0.3s ease;
 }
 
 @keyframes titleAppear {
   0% {
     opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
+    transform: translateY(-30px);
   }
   100% {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -88,23 +88,33 @@ nav h1 {
   animation: titleAppear 0.8s ease-out forwards;
 }
 
-/* Media queries para responsividad */
+nav h1:hover::before {
+  box-shadow: 10px 10px 20px var(--shadow-dark),
+              -10px -10px 20px var(--shadow-light);
+  transform: scale(1.02);
+}
+
 @media (max-width: 768px) {
   nav h1 {
-    font-size: 2rem;
-    padding: 0.4rem 1.5rem;
+    font-size: 2.2rem;
+    padding: 0.6rem 2rem;
   }
   
   nav h1::after {
-    font-size: 1.2rem;
-    right: 0.6rem;
+    font-size: 1.6rem;
+    right: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   nav h1 {
     font-size: 1.8rem;
-    padding: 0.3rem 1.2rem;
+    padding: 0.5rem 1.8rem;
+  }
+  
+  nav h1::after {
+    font-size: 1.4rem;
+    right: 0.6rem;
   }
 }
 
