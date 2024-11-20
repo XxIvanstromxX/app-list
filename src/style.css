@@ -499,24 +499,26 @@ section {
 
 .selector-intervalo {
   background: var(--background);
-  padding: 1rem;
-  border-radius: 12px;
+  padding: 1.2rem;
+  border-radius: 15px;
   box-shadow: 5px 5px 10px var(--shadow-dark),
               -5px -5px 10px var(--shadow-light);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .selector-intervalo label {
+  display: block;
+  margin-bottom: 0.8rem;
   color: var(--text-primary);
   font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .selector-intervalo select {
+  width: 100%;
   padding: 0.8rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--background);
   color: var(--text-primary);
   font-size: 1rem;
@@ -535,6 +537,10 @@ section {
 .selector-intervalo select:focus {
   box-shadow: inset 4px 4px 8px var(--shadow-dark),
               inset -4px -4px 8px var(--shadow-light);
+}
+
+.selector-intervalo select option {
+  padding: 0.5rem;
 }
 
 /* Media queries */

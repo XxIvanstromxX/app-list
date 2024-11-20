@@ -1,10 +1,10 @@
 {
-    "name": "Lista de Tareas",
-    "short_name": "Tareas",
+    "name": "TaskFlow",
+    "short_name": "TaskFlow",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#000000",
+    "background_color": "#ecf0f3",
+    "theme_color": "#3498db",
     "icons": [
       {
         "src": "https://cdn.icon-icons.com/icons2/2063/PNG/512/add_new_create_notification_bell_icon_124695.png",

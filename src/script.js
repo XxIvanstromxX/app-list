@@ -1,11 +1,14 @@
 // Constantes para valores reutilizables
 const TIEMPO_ELIMINACION = 24 * 60 * 60 * 1000;
 const INTERVALOS_NOTIFICACION = {
+  '1min': 1 * 60 * 1000,
   '5min': 5 * 60 * 1000,
   '10min': 10 * 60 * 1000,
+  '15min': 15 * 60 * 1000,
   '30min': 30 * 60 * 1000,
   '1h': 60 * 60 * 1000,
-  '2h': 2 * 60 * 60 * 1000
+  '2h': 2 * 60 * 60 * 1000,
+  '4h': 4 * 60 * 60 * 1000
 };
 const COLORES = {
   COMPLETADO: 'green',
@@ -145,7 +148,9 @@ async function mostrarNotificacion(titulo, mensaje) {
     
     const options = {
       body: mensaje,
-      icon: 'https://cdn.icon-icons.com/icons2/2063/PNG/512/add_new_create_notification_bell_icon_124695.png',
+      icon: new Request('https://cdn.icon-icons.com/icons2/2063/PNG/512/add_new_create_notification_bell_icon_124695.png',{
+        mode: 'no-cors'
+      }),
       badge: 'https://cdn.icon-icons.com/icons2/2063/PNG/512/add_new_create_notification_bell_icon_124695.png',
       vibrate: [200, 100, 200],
       sound: 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3', // URL del sonido
@@ -206,12 +211,13 @@ function crearSelectorIntervalo() {
   selectorContainer.className = 'selector-intervalo';
   
   const label = document.createElement('label');
-  label.textContent = 'Intervalo de notificaciones:';
+  label.textContent = 'Frecuencia de recordatorios:';
   label.htmlFor = 'intervalo-notificacion';
   
   const select = document.createElement('select');
   select.id = 'intervalo-notificacion';
   
+  // Crear las opciones del selector
   Object.entries(INTERVALOS_NOTIFICACION).forEach(([label, value]) => {
     const option = document.createElement('option');
     option.value = value;
@@ -219,15 +225,20 @@ function crearSelectorIntervalo() {
     select.appendChild(option);
   });
   
-  // Recuperar intervalo guardado
-  const intervaloGuardado = localStorage.getItem('intervaloNotificacion');
-  if (intervaloGuardado) {
-    select.value = intervaloGuardado;
-  }
+  // Recuperar el intervalo guardado o usar 30min por defecto
+  const intervaloGuardado = localStorage.getItem('intervaloNotificacion') || INTERVALOS_NOTIFICACION['30min'];
+  select.value = intervaloGuardado;
   
+  // Evento para cuando cambie la selección
   select.addEventListener('change', () => {
     localStorage.setItem('intervaloNotificacion', select.value);
     reiniciarNotificaciones();
+    
+    // Mostrar feedback al usuario
+    mostrarNotificacion(
+      'Intervalo Actualizado',
+      `Las notificaciones se mostrarán cada ${select.options[select.selectedIndex].text}`
+    );
   });
   
   selectorContainer.appendChild(label);
@@ -249,11 +260,15 @@ function iniciarRecordatorios() {
   console.log('Iniciando sistema de recordatorios...');
   
   const intervalo = parseInt(localStorage.getItem('intervaloNotificacion')) || INTERVALOS_NOTIFICACION['30min'];
+  const intervaloEnMinutos = intervalo / (60 * 1000);
+  const textoIntervalo = intervaloEnMinutos >= 60 
+    ? `${intervaloEnMinutos / 60} hora${intervaloEnMinutos / 60 > 1 ? 's' : ''}`
+    : `${intervaloEnMinutos} minutos`;
   
   // Mostrar notificación inicial
   mostrarNotificacion(
     'Sistema Activado',
-    `Las notificaciones se mostrarán cada ${intervalo / (60 * 1000)} minutos`
+    `Las notificaciones se mostrarán cada ${textoIntervalo}`
   );
 
   // Configurar intervalo para notificaciones periódicas
