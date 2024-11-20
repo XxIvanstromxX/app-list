@@ -35,27 +35,14 @@ nav h1 {
   margin: 0;
   font-size: 2.8rem;
   font-weight: 700;
-  color: var(--text-primary);
-  background: linear-gradient(45deg, #3498db, #e74c3c, #3498db);
-  background-size: 200% auto;
+  background: linear-gradient(45deg, #3498db, #e74c3c);
   -webkit-background-clip: text;
-  background-clip: text;
+  -webkit-text-fill-color: transparent;
   position: relative;
   padding: 0.8rem 2.5rem;
   border-radius: 15px;
-  animation: gradient 3s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-  100% {
-    background-position: 0% center;
-  }
+  text-align: center;
+  display: inline-block;
 }
 
 nav h1::before {
@@ -71,6 +58,18 @@ nav h1::before {
               -8px -8px 16px var(--shadow-light);
   z-index: -1;
   transition: all 0.3s ease;
+}
+
+nav h1::after {
+  content: '';
+  font-size: 2rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(45deg, #3498db, #e74c3c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @keyframes titleAppear {
