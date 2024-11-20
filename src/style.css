@@ -88,6 +88,26 @@ nav h1 {
   animation: titleAppear 0.8s ease-out forwards;
 }
 
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  nav h1 {
+    font-size: 2rem;
+    padding: 0.4rem 1.5rem;
+  }
+  
+  nav h1::after {
+    font-size: 1.2rem;
+    right: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  nav h1 {
+    font-size: 1.8rem;
+    padding: 0.3rem 1.2rem;
+  }
+}
+
 section {
   display: grid;
   grid-template-columns: 1fr 2fr;
