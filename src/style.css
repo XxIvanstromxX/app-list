@@ -21,8 +21,8 @@ body {
 
 nav {
   background: var(--background);
+  padding: 1.5rem;
   box-shadow: 0 4px 15px var(--shadow-dark);
-  padding: 20px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -31,9 +31,61 @@ nav {
 nav h1 {
   margin: 0;
   text-align: center;
-  color: var(--primary-blue);
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 600;
+  color: transparent;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 2rem;
+  border-radius: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--background);
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px var(--shadow-dark),
+              -5px -5px 10px var(--shadow-light);
+  z-index: -1;
+}
+
+nav h1::after {
+  content: '✓';
+  font-size: 1.5rem;
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes titleAppear {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+nav h1 {
+  animation: titleAppear 0.8s ease-out forwards;
 }
 
 section {
